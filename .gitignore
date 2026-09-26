@@ -9,10 +9,6 @@ result-*
 build/
 dist/
 
-# Upstream rules cache (only compiled .srs files are published to release branch)
-sukka/*
-!sukka/.gitkeep
-
 # OS specific
 .DS_Store
 .DS_Store?

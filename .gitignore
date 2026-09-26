@@ -1,0 +1,22 @@
+# Nix build results
+result
+result-*
+
+# Direnv
+.direnv/
+
+# Local build artifacts
+build/
+dist/
+
+# Upstream rules cache (only compiled .srs files are published to release branch)
+sukka/*
+!sukka/.gitkeep
+
+# OS specific
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+

@@ -1,0 +1,60 @@
+name: Build & Sync Sing-Box Rulesets via Nix
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'rules/**'
+      - 'flake.nix'
+      - '.github/workflows/**'
+  schedule:
+    # 每天 03:00 UTC（北京时间 11:00）自动检查上游并构建发布
+    - cron: '0 3 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  sync-and-build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Sync upstream Sukka rules
+        run: |
+          git clone --depth 1 --filter=blob:none --sparse https://github.com/SukkaLab/ruleset.skk.moe.git .git-sukka
+          git -C .git-sukka sparse-checkout set sing-box
+          rm -rf sukka
+          mv .git-sukka/sing-box sukka
+          rm -rf .git-sukka
+          git add -f sukka
+
+      - name: Install Nix
+        uses: DeterminateSystems/determinate-nix-action@v3
+
+      - name: Build rulesets with Nix
+        run: |
+          nix build --print-build-logs
+
+      - name: Deploy to release branch
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          STAGE_DIR=$(mktemp -d)
+          cp -rL result/* "$STAGE_DIR/"
+          cd "$STAGE_DIR"
+          git init -b release
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "build: auto-release $(date -u +'%Y-%m-%d %H:%M:%S UTC')"
+          git remote add origin "https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}.git"
+          git push --force origin release

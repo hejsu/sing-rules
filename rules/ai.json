@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "rules": [
+    {
+      "domain": [
+        "labstailwind.pa.googleapis.com",
+        "labstailwind-pa.googleapis.com"
+      ],
+      "domain_suffix": [
+        "notebooklm.google",
+        "notebooklm.google.com"
+      ]
+    }
+  ]
+}

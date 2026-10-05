@@ -2,11 +2,9 @@
   "version": 2,
   "rules": [
     {
-      "domain_suffix": [
-        "local",
-        "lan",
-        "internal"
-      ]
+      "domain": [
+        "tokenhub.tencentmaas.com",
+      ],
     }
   ]
 }

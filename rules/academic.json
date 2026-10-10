@@ -1,0 +1,56 @@
+{
+  "version": 2,
+  "rules": [
+    {
+      "domain_suffix": [
+        "acm.org",
+        "acs.org",
+        "aip.org",
+        "annualreviews.org",
+        "aps.org",
+        "arxiv.org",
+        "blackwell-synergy.com",
+        "cabdirect.org",
+        "cell.com",
+        "clarivate.com",
+        "collegeboard.org",
+        "dblp.org",
+        "doi.org",
+        "frontiersin.org",
+        "hindawi.com",
+        "ieee.org",
+        "iop.org",
+        "iopscience.iop.org",
+        "jstor.org",
+        "mdpi.com",
+        "nature.com",
+        "openreview.net",
+        "osapublishing.org",
+        "oup.com",
+        "overleaf.com",
+        "pnas.org",
+        "researchgate.net",
+        "rsc.org",
+        "science.org",
+        "sciencemag.org",
+        "scihub.org",
+        "scopus.com",
+        "semanticscholar.org",
+        "springer.com",
+        "springernature.com",
+        "tandfonline.com",
+        "webofscience.com",
+        "wiley.com"
+      ],
+      "domain_keyword": [
+        "deepdyve",
+        "els-cdn",
+        "elsevier",
+        "readcube",
+        "sci-hub",
+        "sciencedirect"
+      ]
+    }
+  ]
+}
+
